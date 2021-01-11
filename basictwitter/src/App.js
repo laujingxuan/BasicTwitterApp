@@ -1,7 +1,6 @@
 import logo from './logo.svg';
-import './App.css';
 import {useState} from 'react';
-import {data} from './data';
+import {data} from './data/data';
 
 function App() {
 

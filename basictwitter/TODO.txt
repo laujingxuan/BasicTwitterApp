@@ -1,0 +1,6 @@
+Complete the handleSubmit of login
+
+Add login, logout
+Add navigation bar
+Build the Spring Boot backend controller and database
+Link REACT with SPRING backend
