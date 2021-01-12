@@ -1,4 +1,5 @@
-Complete the handleSubmit of login
+Use router to link successfully login to the comment page
+
 
 Add login, logout
 Add navigation bar
