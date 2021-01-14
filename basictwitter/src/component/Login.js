@@ -1,12 +1,14 @@
 import React, {useState} from 'react';
 import {data} from '../data/userData';
 import Modal from '../component/Modal';
+import { useHistory } from 'react-router-dom';
 
 const Login = () => {
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [users, setUsers] = useState(data);
+    const history = useHistory();
     const [modal, setModal] = useState({
         isModalOpen: false,
         modalContent: ""
@@ -20,6 +22,7 @@ const Login = () => {
                 if (user.password === password){
                     setUsername("");
                     setPassword("");
+                    history.push('/home');
                     //Need to use Router to navigate to the other page
                 }
             }else{
