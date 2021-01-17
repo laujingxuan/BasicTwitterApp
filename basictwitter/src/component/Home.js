@@ -1,9 +1,12 @@
 import React, {useState} from 'react';
 import {data} from '../data/data';
 
-const Home = () =>{
+const Home = (props) =>{
   const [items, setItems] = useState(data);
   const [newComment, setNewComment] = useState("");
+  //Need to handle with session in the future, as in this user props data will be gone after refreshing
+  //Must store the username somewhere
+  const [username, setUsername] = useState(props.user);
 
   const removeItem = (id) => {
     let newItems = items.filter((item) => item.id !== id);
@@ -25,7 +28,7 @@ const Home = () =>{
           return item2;
         }
       });
-      let newItem = {id: latestId+1, user: "John", comment: newComment};
+      let newItem = {id: latestId+1, user: username, comment: newComment};
       setItems([...items, newItem]);
       setNewComment("");
     }
@@ -35,7 +38,12 @@ const Home = () =>{
 
   return (
     <>
-      <div className="title"><h3>Basic Twitter App</h3></div>
+      <div className="title">
+        <h3>
+          Basic Twitter App
+          <span className="right">Hi {username}</span>
+        </h3>
+      </div>
 
       <article className='form'>
         <form>

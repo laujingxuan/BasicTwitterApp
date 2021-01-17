@@ -1,7 +1,5 @@
-Use router to link successfully login to the comment page
-
-
-Add login, logout
 Add navigation bar
+
+Need to learn and use session/cache to pass username between pages
 Build the Spring Boot backend controller and database
 Link REACT with SPRING backend
