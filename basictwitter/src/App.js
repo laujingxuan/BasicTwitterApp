@@ -1,65 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
-import {useState} from 'react';
-import {data} from './data';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
+import React, {useState} from 'react';
+import Home from './component/Home'
+import Login from './component/Login'
+import Welcome from './component/Welcome'
+import ProtectedRoute from './component/ProtectedRoute'
+
 
 function App() {
 
-  const [items, setItems] = useState(data);
-  const [newComment, setNewComment] = useState("");
-
-  const removeItem = (id) => {
-    let newItems = items.filter((item) => item.id !== id);
-    setItems(newItems);
-  } 
-
-  const handleChange = (e) => {
-    const comment = e.target.value;
-    setNewComment(comment);
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (newComment){
-      const latestId = items.reduce((item1, item2) => {
-        if (item1.id > item2.id){
-          return item1;
-        }else{
-          return item2;
-        }
-      });
-      let newItem = {id: latestId+1, user: "John", comment: newComment};
-      setItems([...items, newItem]);
-      setNewComment("");
-    }
-  }
-    
-  
+  const [username, setUsername] = useState("");
 
   return (
-    <>
-      <div className="title"><h3>Basic Twitter App</h3></div>
-
-      <article className='form'>
-        <form>
-          <div className='form-control'>
-            <label htmlFor="newComment">Comment: </label>
-            <input type="text" id="newComment" value={newComment} onChange={handleChange}/>
-          </div>
-        </form>
-        <button type='submit' className='btn' onClick={handleSubmit}>Send</button>
-      </article>
-
-      {items.map((item) => {
-        return(
-          <div key = {item.id} className='item'>
-            <h4>{item.user}</h4>
-            <h4>{item.comment}</h4>
-            <button onClick={() => removeItem(item.id)}>Remove</button>
-          </div>
-        )
-      })}
-    </>
+    <Router>
+      <Switch>
+        <Route exact path='/'>
+          <Welcome/>
+        </Route>
+        <Route path='/login'>
+          <Login userCallback = {setUsername}/>
+        </Route>
+        <ProtectedRoute exact={true} path="/home" component={Home} user = {username}/>
+        <Route path='*'>
+          <Welcome/>
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 

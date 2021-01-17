@@ -6,6 +6,16 @@
   padding-bottom: 50px;
 }
 
+.right {
+  float: right;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 /*
 =============== 
 Variables
@@ -206,7 +216,7 @@ p {
 }
 .modal {
   position: absolute;
-  top: 2rem;
+  /* top: 2rem; */
   left: 50%;
   transform: translateX(-50%);
   background: var(--clr-white);
