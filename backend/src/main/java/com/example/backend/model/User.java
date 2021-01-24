@@ -1,5 +1,6 @@
 package com.example.backend.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -11,6 +12,7 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class User {
@@ -25,6 +27,7 @@ public class User {
 	private String password;
 	
 	@OneToMany(mappedBy = "user")
+	@JsonIgnore
 	private List<Tweet> tweets;
 	
 	public User() {
@@ -35,6 +38,7 @@ public class User {
 		super();
 		this.username = userName;
 		this.password = password;
+		tweets = new ArrayList<Tweet>();
 	}
 
 	public long getId() {

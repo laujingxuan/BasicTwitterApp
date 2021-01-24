@@ -9,6 +9,7 @@ public interface UserService {
 	public User findByUsername(String userName);
 	public User findByUseId(Long userId);
 	public List<Tweet> findTweetByUsername(String userName);
-	public boolean loginValidation(String username, String password);
+	public boolean loginValidation(User user);
+	public User saveUser(User user);
 	
 }

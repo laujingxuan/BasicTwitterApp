@@ -1,12 +1,12 @@
 package com.example.backend.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Tweet {
@@ -15,21 +15,21 @@ public class Tweet {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 	
-	@ManyToOne(cascade = {CascadeType.ALL})
+	@ManyToOne
 	private User user;
 	
 	@NotEmpty
 	private String tweet;
 	
 	//Unix Timestamp
-	@NotEmpty
+	@NotNull
 	private long timeStamp;
 
 	public Tweet() {
 		super();
 	}
 
-	public Tweet(User user, @NotEmpty String tweet, @NotEmpty long timeStamp) {
+	public Tweet(User user, String tweet, long timeStamp) {
 		super();
 		this.user = user;
 		this.tweet = tweet;

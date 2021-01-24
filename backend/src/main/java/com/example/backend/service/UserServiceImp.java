@@ -2,12 +2,17 @@ package com.example.backend.service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.example.backend.model.Tweet;
 import com.example.backend.model.User;
 import com.example.backend.repo.UserRepository;
 
+@Service
+@Transactional
 public class UserServiceImp implements UserService {
 
 	@Autowired
@@ -24,10 +29,10 @@ public class UserServiceImp implements UserService {
 	}
 
 	@Override
-	public boolean loginValidation(String username, String password) {
-		User user = userrepo.findByUsername(username);
+	public boolean loginValidation(User checkUser) {
+		User user = userrepo.findByUsername(checkUser.getUsername());
 		if (user != null) {
-			if (user.getPassword().equals(password)) {
+			if (user.getPassword().equals(checkUser.getPassword())) {
 				return true;
 			}
 		}
@@ -37,5 +42,10 @@ public class UserServiceImp implements UserService {
 	@Override
 	public User findByUseId(Long userId) {
 		return userrepo.findById(userId).get();
+	}
+
+	@Override
+	public User saveUser(User user) {
+		return userrepo.save(user);
 	}
 }
