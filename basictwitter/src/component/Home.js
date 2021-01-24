@@ -1,16 +1,31 @@
-import React, {useState} from 'react';
-import {data} from '../data/data';
+import React, {useState, useEffect} from 'react';
+import TweetDataService from "../Services/TweetService";
 
 const Home = (props) =>{
-  const [items, setItems] = useState(data);
+  const [items, setItems] = useState([]);
   const [newComment, setNewComment] = useState("");
   //Need to handle with session in the future, as in this user props data will be gone after refreshing
   //Must store the username somewhere
   const [username, setUsername] = useState(props.user);
+  
+  const getItems = () =>{
+    TweetDataService.getTweets().then((response) => {
+      setItems(response.data);
+    }).catch(e => {
+      console.log(e);
+    });
+  } 
+
+  //[] to ensure only render the getItems() once.
+  useEffect(() => {
+      getItems();
+    }, [])
 
   const removeItem = (id) => {
-    let newItems = items.filter((item) => item.id !== id);
-    setItems(newItems);
+    // let newItems = items.filter((item) => item.id !== id);
+    TweetDataService.deleteTweet(id).then(()=>getItems()).catch(e => {
+      console.log(e);
+    });
   } 
 
   const handleChange = (e) => {
@@ -21,21 +36,17 @@ const Home = (props) =>{
   const handleSubmit = (e) => {
     e.preventDefault();
     if (newComment){
-      const latestId = items.reduce((item1, item2) => {
-        if (item1.id > item2.id){
-          return item1;
-        }else{
-          return item2;
-        }
+      let newItem = {tweet: newComment, timeStamp: Date.now()};
+      //Need to update to capture the login user later, hard coding now because session hasnt been implemented.
+      TweetDataService.createTweet(items[0].user.id,newItem).then(() => {
+        getItems();
+      }).catch(e => {
+        console.log(e);
       });
-      let newItem = {id: latestId+1, user: username, comment: newComment};
-      setItems([...items, newItem]);
-      setNewComment("");
+      setNewComment("");      
     }
   }
     
-  
-
   return (
     <>
       <div className="title">
@@ -58,8 +69,8 @@ const Home = (props) =>{
       {items.map((item) => {
         return(
           <div key = {item.id} className='item'>
-            <h4>{item.user}</h4>
-            <h4>{item.comment}</h4>
+            <h4>{item.user.username}</h4>
+            <h4>{item.tweet}</h4>
             <button onClick={() => removeItem(item.id)}>Remove</button>
           </div>
         )
