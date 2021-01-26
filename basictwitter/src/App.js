@@ -7,8 +7,8 @@ import ProtectedRoute from './component/ProtectedRoute'
 
 
 function App() {
-
-  const [username, setUsername] = useState("");
+  ////user will be saved in session, hence dont need callback
+  // const [username, setUsername] = useState("");
 
   return (
     <Router>
@@ -17,9 +17,12 @@ function App() {
           <Welcome/>
         </Route>
         <Route path='/login'>
-          <Login userCallback = {setUsername}/>
+          <Login/>
+          {/* <Login userCallback = {setUsername}/> */}
         </Route>
-        <ProtectedRoute exact={true} path="/home" component={Home} user = {username}/>
+        {/*user will be saved in session, hence dont need to pass the user*/}
+        <ProtectedRoute exact={true} path="/home" component={Home}/>        
+        {/* <ProtectedRoute exact={true} path="/home" component={Home} user = {username}/> */}
         <Route path='*'>
           <Welcome/>
         </Route>

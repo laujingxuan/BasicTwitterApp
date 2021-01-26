@@ -1,17 +1,17 @@
 import React, {useState} from 'react';
-import {data} from '../data/userData';
 import Modal from '../component/Modal';
 import { useHistory } from 'react-router-dom';
+// import auth from './Auth'
+import UserDataService from "../Services/UserService";
 
 const Login = (props) => {
-
-    const sendUser = (user) =>{
-        props.userCallback(user);
-    }
+    ////user will be saved in session, hence dont need callback
+    // const sendUser = (user) =>{
+    //     props.userCallback(user);
+    // }
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [users, setUsers] = useState(data);
     const history = useHistory();
     const [modal, setModal] = useState({
         isModalOpen: false,
@@ -21,19 +21,25 @@ const Login = (props) => {
     const handleSubmit = (e) =>{
         e.preventDefault();
         if(username && password){
-            let user = users.find(user => user.username === username);
-            if (typeof user !== "undefined"){
-                if (user.password === password){
+            let user = {username: username, password: password};
+            UserDataService.authentication(user).then((response) => {
+                if (response.data === true){
                     setUsername("");
                     setPassword("");
-                    sendUser(username);
-                    history.push('/home');
-                    //Need to use Router to navigate to the other page
+                    ////user will be saved in session   
+                    // sendUser(username);                    
+                    sessionStorage.setItem('name', username)
+                    //another way is to pass history.push function into auth.login(), can refer to how logout is done
+                    // auth.login();
+                    //Navigate to the other page
+                    history.push('/home');  
+                }else{
+                    //Implement wrong username/password
+                    setModal({...modal, isModalOpen: true, modalContent: "Username/Password is incorrect" })
                 }
-            }else{
-                //Implement wrong username/password
-                setModal({...modal, isModalOpen: true, modalContent: "Username/Password is incorrect" })
-            }
+            }).catch(e => {
+            console.log(e);
+            });    
         }
         else{
             //Implement need to fill all fields.

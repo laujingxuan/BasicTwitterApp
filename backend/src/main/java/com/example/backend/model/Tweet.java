@@ -17,7 +17,7 @@ public class Tweet {
 	
 	@ManyToOne
 	private User user;
-	
+
 	@NotEmpty
 	private String tweet;
 	
@@ -29,6 +29,12 @@ public class Tweet {
 		super();
 	}
 
+	public Tweet(String tweet, long timeStamp) {
+		super();
+		this.tweet = tweet;
+		this.timeStamp = timeStamp;
+	}
+	
 	public Tweet(User user, String tweet, long timeStamp) {
 		super();
 		this.user = user;

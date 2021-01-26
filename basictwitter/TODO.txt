@@ -1,5 +1,5 @@
-Add navigation bar
+REACT Project
+- Convert timestamp to actual time and show in the page
+- Add navigation bar
 
-Need to learn and use session/cache to pass username between pages
-Build the Spring Boot backend controller and database
-Link REACT with SPRING backend
+

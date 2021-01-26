@@ -3,7 +3,14 @@
   font-weight: bold;
   font-family: "Open Sans", Helvetica, Arial, sans-serif;
   padding: 10px;
-  padding-bottom: 50px;
+}
+
+.tab {
+  padding-left: 70px;
+}
+
+.capitalize {
+  text-transform: capitalize;
 }
 
 .right {
@@ -14,6 +21,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.cssname {
+  font-size: 22px;
+  font-weight: bold;
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+  padding-bottom: 10px;
 }
 
 /*
@@ -101,7 +115,9 @@ a {
 }
 h1,
 h2,
-/* h3, */
+h3 {
+  text-transform: capitalize;
+}
 h4 {
   letter-spacing: var(--spacing);
   text-transform: capitalize;
