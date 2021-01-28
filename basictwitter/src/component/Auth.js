@@ -8,6 +8,12 @@ class Auth{
     //     this.authenticated = true;
     // }
 
+    // logout(cb){
+    //     // this.authenticated = false;
+    //     sessionStorage.removeItem('name');
+    //     cb();
+    // }    
+
     logout(cb){
         // this.authenticated = false;
         sessionStorage.removeItem('name');

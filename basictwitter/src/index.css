@@ -23,13 +23,6 @@
   align-items: center;
 }
 
-.cssname {
-  font-size: 22px;
-  font-weight: bold;
-  font-family: "Open Sans", Helvetica, Arial, sans-serif;
-  padding-bottom: 10px;
-}
-
 /*
 =============== 
 Variables
@@ -278,7 +271,7 @@ p {
   border-radius: var(--radius);
   cursor: pointer;
 }
-.nav-links {
+/* .nav-links {
   max-width: var(--fixed-width);
   margin: 0 auto;
   margin-bottom: 4rem;
@@ -287,7 +280,7 @@ p {
 }
 .nav-links a {
   color: var(--clr-grey-5);
-}
+} */
 .users {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
