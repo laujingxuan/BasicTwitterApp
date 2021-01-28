@@ -29,6 +29,7 @@ const Login = (props) => {
                     ////user will be saved in session   
                     // sendUser(username);                    
                     sessionStorage.setItem('name', username)
+                    console.log("Login"+sessionStorage.getItem("name"));
                     //another way is to pass history.push function into auth.login(), can refer to how logout is done
                     // auth.login();
                     //Navigate to the other page

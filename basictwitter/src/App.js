@@ -1,9 +1,10 @@
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
-import React, {useState} from 'react';
+import React from 'react';
 import Home from './component/Home'
 import Login from './component/Login'
 import Welcome from './component/Welcome'
 import ProtectedRoute from './component/ProtectedRoute'
+import Navbar from './component/Navbar/Navbar'
 
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
 
   return (
     <Router>
+      <Navbar/>
       <Switch>
         <Route exact path='/'>
           <Welcome/>

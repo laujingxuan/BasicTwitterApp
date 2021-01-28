@@ -68,10 +68,7 @@ const Home = (props) =>{
     
   return (
     <>
-      <div className="title">
-        <h3>Basic Twitter App</h3>
-      </div>
-      <div className="center cssname">
+      <div className="center title">
         <h3>
           Hi {username}
         </h3>
@@ -110,13 +107,13 @@ const Home = (props) =>{
           </div>
         )
       })}
-      <span className="right title">
+      {/* <span className="right title">
         <button type="button" className="btn btn-light" onClick = {() => {
           Auth.logout(() => {
             props.history.push("/");
           })
         }}>Logout</button>
-      </span>
+      </span> */}
     </>
   );
 }
